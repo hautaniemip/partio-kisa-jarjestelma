@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react';
+
 import ResultTable from '../../components/ResultTable';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const Home = () => {
 	const [tasks, setTasks] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
+
+	const [results, setResults] = useState(null);
 
 	useEffect(() => {
 		let getTasks = () => {
@@ -30,14 +34,38 @@ const Home = () => {
 		getTasks()
 	}, []);
 
+	useEffect(() => {
+		let getResults = () => {
+			fetch("/api/results")
+				.then((res) => {
+					if (!res.ok)
+						throw new Error(`HTTP error: ${res.status}`);
+					return res.json();
+				})
+				.then((data) => {
+					setResults(data);
+					setError(null);
+				})
+				.catch((err) => {
+					setResults(null);
+					setError(err.message);
+				})
+				.finally(() => {
+					setLoading(false);
+				});
+		};
+
+		getResults()
+	}, []);
+
 	const makeColumns = () => {
 		if (!tasks)
 			return [];
 
-		let columns = [{ Header: "Joukkue", accessor: "team"}]
+		let columns = [{ Header: "Joukkue", accessor: "team.name"}]
 		tasks.forEach((task) => {
 			let name = task.name;
-			let id = task.id.toString();
+			let id = "team." + task.id.toString();
 			columns.push({ Header: name, accessor: id });
 		});
 
@@ -60,8 +88,10 @@ const Home = () => {
 		<>
 			<h2>Home</h2>
 			<br />
-			<h3>Joukkueet</h3>
-			<ResultTable columns={columns} data={data} />
+			<h3>Tulokset</h3>
+			{error && (<span>{error}</span>)}
+			{loading && (<LoadingSpinner />)}
+			{tasks && results && <ResultTable columns={columns} data={results} />}
 			<h3>Rastit</h3>
 		</>
 	);

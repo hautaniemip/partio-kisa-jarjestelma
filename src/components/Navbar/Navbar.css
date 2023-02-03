@@ -1,0 +1,14 @@
+nav {
+	display: flex;
+	justify-content: center;
+}
+
+.nav-item {
+	text-decoration: none;
+	color: black;
+	padding: 1rem;
+}
+
+.nav-item.active {
+	background-color: red;
+}

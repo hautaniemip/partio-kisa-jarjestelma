@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 
-import ResultTable from '../../components/ResultTable';
+import Table from '../../components/Table';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
 const Home = () => {
@@ -93,7 +93,7 @@ const Home = () => {
 			<h3>Tulokset</h3>
 			{error && (<span>{error}</span>)}
 			{loading && (<LoadingSpinner />)}
-			{tasks && results && <ResultTable columns={columns} data={results} />}
+			{tasks && results && <Table columns={columns} data={results} />}
 			<h3>Rastit</h3>
 		</>
 	);

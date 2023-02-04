@@ -1,6 +1,6 @@
 import { NavLink, useRouterMatch } from 'react-router-dom';
 
-import './TabBar.css';
+import './TaskBar.css';
 
 const TabBar = ({tasks}) => {
 	return (

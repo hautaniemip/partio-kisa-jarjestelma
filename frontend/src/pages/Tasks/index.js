@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import TabBar from './page-components/TabBar';
+import TaskBar from './../../components/TaskBar';
 
 const Tasks = () => {
 	const [tasks, setTasks] = useState([]);
@@ -36,7 +36,7 @@ const Tasks = () => {
 	return (
 		<>
 			<h2>Tasks</h2>
-			<TabBar tasks={tasks} />
+			<TaskBar tasks={tasks} />
 			<Routes>
 				{tasks && tasks.map((task) => {
 				return (

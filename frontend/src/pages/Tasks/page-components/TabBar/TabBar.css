@@ -1,0 +1,9 @@
+.tab-bar {
+	padding: 1em;
+	text-decoration: none;
+	color: black;
+}
+
+.tab-bar.active {
+	background-color: green;
+}

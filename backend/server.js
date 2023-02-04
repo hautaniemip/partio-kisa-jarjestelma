@@ -67,6 +67,19 @@ app.get("/api/results", (req, res) => {
 	});
 });
 
+const parseResults = (rows) => {
+	let results = {};
+
+	for (const row of rows) {
+		results[row.TeamId] = results[row.TeamId] || {};
+		results[row.TeamId]["name"] = row.name;
+		results[row.TeamId][row.TaskId] = row.points;
+		results[row.TeamId]["total"] = results[row.TeamId]["total"] + row.points || row.points;
+	}
+
+	return Object.keys(results).map(key => ({ team: results[key] }));
+}
+
 app.listen(PORT, () => {
 	console.log(`Listening on  ${PORT}`);
 });

@@ -1,8 +1,8 @@
 import { useTable } from 'react-table';
 
-import './ResultTable.css'
+import './Table.css'
 
-const ResultTable = ({ columns, data }) => {
+const Table = ({ columns, data }) => {
 	const {
 		getTableProps,
 		getTableBodyProps,
@@ -41,4 +41,4 @@ const ResultTable = ({ columns, data }) => {
 	);
 }
 
-export default ResultTable;
+export default Table;

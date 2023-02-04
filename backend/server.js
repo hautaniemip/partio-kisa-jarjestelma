@@ -56,9 +56,17 @@ app.get("/api/results", (req, res) => {
 	});
 });
 
-		console.log(finalResults);
+app.get("/api/results/:id", (req, res) => {
+	let query = connection.query(`SELECT Results.TeamId, Results.TaskId, Results.points, Teams.name FROM Results JOIN Teams ON Results.TeamId=Teams.id AND Results.TaskId=${req.params.id};`, (err, rows, fields) => {
+		if (err) {
+			console.log(err)
+			res.status(500);
+			return;
+		}
 
-		res.json(finalResults);
+		const results = parseResults(rows);
+
+		res.json(results);
 	});
 });
 

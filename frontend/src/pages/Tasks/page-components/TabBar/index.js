@@ -7,7 +7,7 @@ const TabBar = ({tasks}) => {
 		<>
 			{tasks && tasks.map((task) => {
 				return (
-					<NavLink key={task.id} to={`tasks/task-${task.id}`} className={({isActive}) => (isActive ? "tab-bar active" : "tab-bar")}>{task.name}</NavLink>
+					<NavLink key={task.id} to={`/tasks/task-${task.id}`} className={({isActive}) => (isActive ? "tab-bar active" : "tab-bar")}>{task.name}</NavLink>
 				)
 			})}
 			<NavLink to="/tasks/add-task" className={({isActive}) => (isActive ? "tab-bar active" : "tab-bar")}>Add Task</NavLink>

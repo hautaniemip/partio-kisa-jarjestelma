@@ -69,6 +69,8 @@ const Home = () => {
 			columns.push({ Header: name, accessor: id });
 		});
 
+		columns.push({Header: "Total", accessor: "team.total"})
+
 		return columns;
 	}
 

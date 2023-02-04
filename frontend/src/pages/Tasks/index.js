@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import TaskBar from './../../components/TaskBar';
 
@@ -44,6 +44,7 @@ const Tasks = () => {
 				)
 				})}
 				<Route path="/add-task" element={<h3>Add Task</h3>} />
+				<Route path="/" element={<Navigate to="add-task" />} />
 			</Routes>
 			<p>Test</p>
 		</>

@@ -32,6 +32,16 @@ app.get("/api/tasks", (req, res) => {
 	});
 });
 
+app.get("/api/task/:id", (req, res) => {
+	let query = connection.query(`SELECT * FROM Tasks WHERE id=${req.params.id};`, (err, rows, fields) => {
+		if (err) {
+			console.log(err)
+			res.status(500);
+		}
+		res.json(rows);
+	});
+});
+
 app.get("/api/results", (req, res) => {
 	let query = connection.query("SELECT Results.TeamId, Results.TaskId, Results.points, Teams.name FROM Results JOIN Teams ON Results.TeamId=Teams.id;", (err, rows, fields) => {
 		if (err) {

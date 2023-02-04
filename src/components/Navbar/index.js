@@ -11,6 +11,9 @@ const Navbar = () => {
 			<NavLink className={({isActive}) => (isActive ? "nav-item active" : "nav-item")} to="/teams">
 				Teams
 			</NavLink>
+			<NavLink className={({isActive}) => (isActive ? "nav-item active" : "nav-item")} to="/tasks">
+				Tasks
+			</NavLink>
 		</nav>
 	);
 };

@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 
 import Home from './pages/Home';
 import Teams from './pages/Teams';
+import Tasks from './pages/Tasks';
 
 import './App.css';
 
@@ -15,7 +16,8 @@ function App() {
 				<Navbar />
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route path="/teams" element= {<Teams />} />
+					<Route path="/teams" element={<Teams />} />
+					<Route path="/tasks" element={<Tasks />} />
 				</Routes>
 			</BrowserRouter>
 		</div>

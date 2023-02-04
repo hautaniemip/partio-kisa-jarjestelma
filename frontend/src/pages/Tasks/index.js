@@ -38,6 +38,11 @@ const Tasks = () => {
 			<h2>Tasks</h2>
 			<TabBar tasks={tasks} />
 			<Routes>
+				{tasks && tasks.map((task) => {
+				return (
+					<Route key={task.id} path={`task-${task.id}`} element={<h3>{task.name}</h3>} />
+				)
+				})}
 				<Route path="/add-task" element={<h3>Add Task</h3>} />
 			</Routes>
 			<p>Test</p>

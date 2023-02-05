@@ -58,7 +58,8 @@ const Home = () => {
 		getResults()
 	}, []);
 
-	const makeColumns = () => {
+	const columns = useMemo(
+		() => {
 		if (!tasks)
 			return [];
 
@@ -72,19 +73,9 @@ const Home = () => {
 		columns.push({Header: "Total", accessor: "team.total"})
 
 		return columns;
-	}
-
-	const columns = useMemo(
-		() => makeColumns(),
+		},
 		[tasks]
 	);
-
-	const data = [
-		{
-			team: "Test",
-			1: 100
-		}
-	];
 
 	return (
 		<>

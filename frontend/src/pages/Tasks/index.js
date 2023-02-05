@@ -6,27 +6,21 @@ import TaskView from './../../components/TaskView';
 
 const Tasks = () => {
 	const [tasks, setTasks] = useState([]);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(null);
 
 	useEffect(() => {
 		let getTasks = () => {
 			fetch("/api/tasks")
 				.then((res) => {
 					if (!res.ok)
-						throw new Error(`HTTP error: ${res.status}`);
+						throw new Error(`Failed loading Tasks:\nHTTP error: ${res.status}`);
 					return res.json();
 				})
 				.then((data) => {
 					setTasks(data);
-					setError(null);
 				})
 				.catch((err) => {
 					setTasks(null);
-					setError(err.message);
-				})
-				.finally(() => {
-					setLoading(false);
+					console.log(err);
 				});
 		};
 

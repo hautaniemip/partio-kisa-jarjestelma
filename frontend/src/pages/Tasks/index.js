@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 import TaskBar from './../../components/TaskBar';
 import TaskView from './../../components/TaskView';
+import AddTaskForm from './../../components/AddTaskForm';
 
 const Tasks = () => {
 	const [tasks, setTasks] = useState([]);
@@ -38,7 +39,7 @@ const Tasks = () => {
 					<Route key={task.id} path={`task-${task.id}`} element={<TaskView task={task} />} />
 				)
 				})}
-				<Route path="/add-task" element={<h3>Add Task</h3>} />
+				<Route path="/add-task" element={<AddTaskForm />} />
 				<Route path="/" element={<Navigate to="add-task" />} />
 			</Routes>
 		</>

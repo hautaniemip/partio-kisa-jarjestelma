@@ -25,6 +25,30 @@ app.get("/api/teams", (req, res) => {
 	});
 });
 
+app.post("/api/teams", (req, res) => {
+	connection.query("SET FOREIGN_KEY_CHECKS=0;")
+	connection.query("DELETE FROM Teams;", (err, rows, fields) => {
+		if (err) {
+			console.log(err)
+			res.status(500);
+		}
+	});
+	connection.query("SET FOREIGN_KEY_CHECKS=1;")
+
+	let newRows = [];
+	for (const team of req.body)
+		newRows.push([team.id, team.name, 1]);
+	
+	connection.query(`INSERT INTO Teams(id, name, TaskId) VALUES ?;`, [newRows], (err, rows, fields) => {
+		if (err) {
+			console.log(err)
+			res.status(500);
+		}
+	});
+
+	res.send();
+});
+
 app.get("/api/tasks", (req, res) => {
 	let query = connection.query("SELECT * FROM Tasks;", (err, rows, fields) => {
 		if (err) {

@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 
-import './AddTaskForm.css';
+import './ManagerForm.css';
 
-const AddTaskForm = () => {
+const AddTaskForm = ({ header, apiPath }) => {
 	const [inputFields, setInputFields] = useState([{ id: 100, name: '' }])
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
 		let getTasks = () => {
-			fetch("/api/tasks")
+			fetch(apiPath)
 				.then((res) => {
 					if (!res.ok)
 						throw new Error(`HTTP error: ${res.status}`);
@@ -62,7 +62,7 @@ const AddTaskForm = () => {
 		};
 		// TODO: Validate form inputs before sending:
 		// - no same id
-		fetch("/api/tasks", requestOptions)
+		fetch(apiPath, requestOptions)
 		.catch((err) => {
 			console.log(err);
 		})
@@ -70,12 +70,12 @@ const AddTaskForm = () => {
 	}
 
 	return (
-		<div>
-			<h3>Add Task</h3>
+		<div className="manager">
+			<h3>{header}</h3>
 			<form onSubmit={e => e.preventDefault()} className="add-task">
 				<div className="form-header form-row">
 					<div>Numero</div>
-					<div>Joukkue</div>
+					<div>Nimi</div>
 				</div>
 				{inputFields && inputFields.map((input, index) => {
 					return (
@@ -93,8 +93,7 @@ const AddTaskForm = () => {
 								value={input.name}
 								onChange={event => handleFormChange(index, event)}
 							/>
-							{/* FIXME: Pressing enter in input deletes the row */}
-							<button onClick={() => removeField(index)}>X</button>
+							<button type="button" onClick={() => removeField(index)}>X</button>
 						</div>
 					)
 				})}

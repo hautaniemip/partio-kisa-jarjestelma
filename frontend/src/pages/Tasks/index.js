@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import TaskBar from './../../components/TaskBar';
+import TaskView from './../../components/TaskView';
 
 const Tasks = () => {
 	const [tasks, setTasks] = useState([]);
@@ -40,13 +41,12 @@ const Tasks = () => {
 			<Routes>
 				{tasks && tasks.map((task) => {
 				return (
-					<Route key={task.id} path={`task-${task.id}`} element={<h3>{task.name}</h3>} />
+					<Route key={task.id} path={`task-${task.id}`} element={<TaskView task={task} />} />
 				)
 				})}
 				<Route path="/add-task" element={<h3>Add Task</h3>} />
 				<Route path="/" element={<Navigate to="add-task" />} />
 			</Routes>
-			<p>Test</p>
 		</>
 	);
 }

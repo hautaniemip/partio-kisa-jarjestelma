@@ -36,7 +36,6 @@ app.get("/api/tasks", (req, res) => {
 });
 
 app.post("/api/tasks", (req, res) => {
-	console.log(req.body);
 	connection.query("SET FOREIGN_KEY_CHECKS=0;")
 	connection.query("DELETE FROM Tasks;", (err, rows, fields) => {
 		if (err) {
@@ -47,13 +46,9 @@ app.post("/api/tasks", (req, res) => {
 	connection.query("SET FOREIGN_KEY_CHECKS=1;")
 
 	let newRows = [];
-	for (const task of req.body) {
-		console.log(task)
+	for (const task of req.body)
 		newRows.push([task.id, task.name]);
-	}
-
-	console.log(req.headers);
-
+	
 	connection.query(`INSERT INTO Tasks(id, name) VALUES ?;`, [newRows], (err, rows, fields) => {
 		if (err) {
 			console.log(err)

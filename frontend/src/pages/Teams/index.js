@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import LoadingSpinner from '../../components/LoadingSpinner';
+import ManagerForm from '../../components/ManagerForm';
 
 const Teams = () => {
 	const [teams, setTeams] = useState(null);
@@ -35,17 +36,7 @@ const Teams = () => {
 	return (
 		<div>
 			<h2>Teams</h2>
-			{error && (<span>{error}</span>)}
-			{loading && (<LoadingSpinner />)}
-			<ul>
-				{teams && teams.map((data) => {
-					return (
-						<li key={data.id}>
-							<span>{data.id} {data.name}</span>
-						</li>
-					)
-				})}
-			</ul>
+			<ManagerForm header="Hallitse joukkueita" apiPath="/api/teams" />
 		</div>
 	);
 };

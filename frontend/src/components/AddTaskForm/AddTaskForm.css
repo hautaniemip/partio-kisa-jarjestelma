@@ -1,0 +1,11 @@
+form.add-task {
+	display: grid;
+	justify-content: center;
+}
+
+.form-row {
+	display: grid;
+	grid-template-columns: 4em 12em 2em;
+	grid-gap: 1em;
+	align-items: center;
+}

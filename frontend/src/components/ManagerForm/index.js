@@ -3,9 +3,7 @@ import { useState, useEffect } from 'react';
 import './ManagerForm.css';
 
 const AddTaskForm = ({ header, apiPath }) => {
-	const [inputFields, setInputFields] = useState([{ id: 100, name: '' }])
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(null);
+	const [inputFields, setInputFields] = useState([{ id: 1, name: '' }])
 
 	useEffect(() => {
 		let getTasks = () => {
@@ -17,19 +15,14 @@ const AddTaskForm = ({ header, apiPath }) => {
 				})
 				.then((data) => {
 					setInputFields(data);
-					setError(null);
 				})
 				.catch((err) => {
-					setInputFields(null);
-					setError(err.message);
-				})
-				.finally(() => {
-					setLoading(false);
+					console.log(err)
 				});
 		};
 
 		getTasks()
-	}, []);
+	}, [apiPath]);
 
 	const handleFormChange = (index, event) => {
 		let data = [...inputFields];

@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 import TaskBar from './../../components/TaskBar';
 import TaskView from './../../components/TaskView';
-import MangerForm from './../../components/ManagerForm';
+import ManagerForm from './../../components/ManagerForm';
 
 const Tasks = () => {
 	const [tasks, setTasks] = useState([]);
@@ -39,7 +39,7 @@ const Tasks = () => {
 					<Route key={task.id} path={`task-${task.id}`} element={<TaskView task={task} />} />
 				)
 				})}
-				<Route path="/add-task" element={<MangerForm header="Hallitse rasteja" apiPath="/api/tasks" />} />
+				<Route path="/add-task" element={<ManagerForm header="Hallitse rasteja" apiPath="/api/tasks" />} />
 				<Route path="/" element={<Navigate to="add-task" />} />
 			</Routes>
 		</>

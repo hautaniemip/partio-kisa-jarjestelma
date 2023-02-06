@@ -8,6 +8,8 @@ const TaskView = ({task}) => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
+	const [teamId, setTeamId] = useState(1)
+
 	useEffect(() => {
 		let getResults = () => {
 			fetch(`/api/results/${task.id}`)
@@ -45,9 +47,40 @@ const TaskView = ({task}) => {
 		],
 		[task.id]
 	);
+
+	const handleChange = (event) => {
+		setTeamId(event.target.value);
+	}
+
+	const markTeam = () => {
+		console.log("Team " + teamId + " arrived");
+		const requestOptions = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({teamId: teamId, taskId: task.id})
+		};
+		// TODO: Validate form inputs before sending:
+		// - no same id
+		fetch("/api/team/change-task", requestOptions)
+		.catch((err) => {
+			console.log(err);
+		})
+	}
 	return (
 		<div>
 			<h3>{task.name}</h3>
+			<div>
+				<input
+					type="number"
+					name="id"
+					value={teamId}
+					onChange={ event => handleChange(event) }
+				/>
+				<button type="button" onClick={ markTeam }>Merkitse joukkue saapuneeksi</button>
+			</div>
+			<h4>Tulokset</h4>
 			{error && (<span>{error}</span>)}
 			{loading && (<LoadingSpinner />)}
 			{results && <Table columns={columns} data={results} />}

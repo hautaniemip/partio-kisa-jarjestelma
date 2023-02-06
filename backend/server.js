@@ -49,6 +49,18 @@ app.post("/api/teams", (req, res) => {
 	res.send();
 });
 
+app.post("/api/team/change-task", (req, res) => {
+	connection.query(`UPDATE Teams SET TaskId=${req.body.taskId} WHERE id=${req.body.teamId};`, (err, fields) => {
+		if (err) {
+			console.log(err)
+			res.status(500);
+		}
+	});
+
+
+	res.send();
+});
+
 app.get("/api/tasks", (req, res) => {
 	let query = connection.query("SELECT * FROM Tasks;", (err, rows, fields) => {
 		if (err) {

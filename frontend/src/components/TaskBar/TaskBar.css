@@ -1,9 +1,15 @@
-.tab-bar {
+.task-bar {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.task-tab {
 	padding: 1em;
 	text-decoration: none;
 	color: black;
 }
 
-.tab-bar.active {
+.task-tab.active {
 	background-color: green;
 }

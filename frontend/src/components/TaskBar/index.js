@@ -4,15 +4,15 @@ import './TaskBar.css';
 
 const TabBar = ({tasks}) => {
 	return (
-		<>
-			<NavLink to="/tasks/manage" className={({isActive}) => (isActive ? "tab-bar active" : "tab-bar")}>Hallinta</NavLink>
+		<div className="task-bar">
+			<NavLink to="/tasks/manage" className={({isActive}) => (isActive ? "task-tab active" : "task-tab")}>Hallinta</NavLink>
 
 			{tasks && tasks.map((task) => {
 				return (
-					<NavLink key={task.id} to={`/tasks/task-${task.id}`} className={({isActive}) => (isActive ? "tab-bar active" : "tab-bar")}>{task.name}</NavLink>
+					<NavLink key={task.id} to={`/tasks/task-${task.id}`} className={({isActive}) => (isActive ? "task-tab active" : "task-tab")}>{task.name}</NavLink>
 				)
 			})}
-		</>
+		</div>
 	);
 }
 

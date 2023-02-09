@@ -75,7 +75,7 @@ const AddTaskForm = ({ header, apiPath }) => {
 	return (
 		<div className="manager">
 			<h3>{header}</h3>
-			<form onSubmit={e => e.preventDefault()} className="add-task">
+			<form onSubmit={event => event.preventDefault()} className="manager">
 				<div className="form-header form-row">
 					<div>Numero</div>
 					<div>Nimi</div>
@@ -100,9 +100,9 @@ const AddTaskForm = ({ header, apiPath }) => {
 						</div>
 					)
 				})}
+				<button type="button" onClick={addField}>Add More...</button>
+				<button type="button" onClick={save}>Save</button>
 			</form>
-			<button onClick={addField}>Add More...</button>
-			<button onClick={save}>Save</button>
 		</div>
 	);
 }

@@ -44,8 +44,12 @@ const AddTaskForm = ({ header, apiPath }) => {
     	setInputFields(data);
 	}
 
-	const save = (e) => {
-		e.preventDefault();
+	const save = (event) => {
+		event.preventDefault();
+		if (validateFiels()) {
+			alert("Kaksi tai useampi kenttä sisältää saman numeron");
+			return;
+		}
 		const requestOptions = {
 			method: "POST",
 			headers: {
@@ -53,13 +57,19 @@ const AddTaskForm = ({ header, apiPath }) => {
 			},
 			body: JSON.stringify(inputFields)
 		};
-		// TODO: Validate form inputs before sending:
-		// - no same id
+
 		fetch(apiPath, requestOptions)
 		.catch((err) => {
 			console.log(err);
 		})
 		.finally(() => window.location.reload(false));
+	}
+
+	const validateFiels = () => {
+		let hash = Object.create(null);
+		return inputFields.some((arr) => {
+			return arr["id"] && (hash[arr["id"]] || !(hash[arr["id"]] = true));
+		});
 	}
 
 	return (

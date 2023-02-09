@@ -5,7 +5,7 @@ import './TaskBar.css';
 const TabBar = ({tasks}) => {
 	return (
 		<>
-			<NavLink to="/tasks/add-task" className={({isActive}) => (isActive ? "tab-bar active" : "tab-bar")}>Add Task</NavLink>
+			<NavLink to="/tasks/manage" className={({isActive}) => (isActive ? "tab-bar active" : "tab-bar")}>Hallinta</NavLink>
 
 			{tasks && tasks.map((task) => {
 				return (

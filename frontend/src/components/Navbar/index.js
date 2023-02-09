@@ -6,13 +6,13 @@ const Navbar = () => {
 	return (
 		<nav>
 			<NavLink exact="true" className={({isActive}) => (isActive ? "nav-item active" : "nav-item")} to="/">
-				Home
+				Yhteenveto
 			</NavLink>
 			<NavLink className={({isActive}) => (isActive ? "nav-item active" : "nav-item")} to="/teams">
-				Teams
+				Joukkueet
 			</NavLink>
 			<NavLink className={({isActive}) => (isActive ? "nav-item active" : "nav-item")} to="/tasks">
-				Tasks
+				Rastit
 			</NavLink>
 		</nav>
 	);

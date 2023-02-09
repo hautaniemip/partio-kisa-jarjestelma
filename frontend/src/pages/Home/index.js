@@ -3,10 +3,10 @@ import ResultsTable from '../../components/ResultTable';
 const Home = () => {
 	return (
 		<>
-			<h2>Home</h2>
+			<h2>Yhteenveto</h2>
 			<br />
 			<h3>Tulokset</h3>
-			<ResultsTable />			
+			<ResultsTable />	
 			<h3>Rastit</h3>
 		</>
 	);

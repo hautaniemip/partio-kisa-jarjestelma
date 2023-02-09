@@ -50,7 +50,7 @@ const Teams = () => {
 
 	return (
 		<div>
-			<h2>Teams</h2>
+			<h2>Joukkueet</h2>
 			{error && (<span>{error}</span>)}
 			{loading && (<LoadingSpinner />)}
 			{teams && <Table columns={columns} data={teams} />}

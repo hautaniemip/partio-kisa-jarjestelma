@@ -11,14 +11,19 @@ import './App.css';
 function App() {
 	return (
 		<div className="App">
-			<h1>Kisa palvelu</h1>
 			<BrowserRouter>
-				<Navbar />
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/teams" element={<Teams />} />
-					<Route path="/tasks/*" element={<Tasks />} />
-				</Routes>
+				<header>
+					<h1>Kisa palvelu</h1>
+					<Navbar />
+				</header>
+				<div className="main-content">
+					<Routes>
+						<Route path="/" element={<Home />} />
+						<Route path="/teams" element={<Teams />} />
+						<Route path="/tasks/*" element={<Tasks />} />
+					</Routes>
+				</div>
+				<footer></footer>
 			</BrowserRouter>
 		</div>
   );

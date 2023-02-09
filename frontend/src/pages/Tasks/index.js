@@ -31,7 +31,7 @@ const Tasks = () => {
 
 	return (
 		<>
-			<h2>Tasks</h2>
+			<h2>Rastit</h2>
 			<TaskBar tasks={tasks} />
 			<Routes>
 				{tasks && tasks.map((task) => {
@@ -39,8 +39,8 @@ const Tasks = () => {
 					<Route key={task.id} path={`task-${task.id}`} element={<TaskView task={task} />} />
 				)
 				})}
-				<Route path="/add-task" element={<ManagerForm header="Hallitse rasteja" apiPath="/api/tasks" />} />
-				<Route path="/" element={<Navigate to="add-task" />} />
+				<Route path="/manage" element={<ManagerForm header="Hallitse rasteja" apiPath="/api/tasks" />} />
+				<Route path="/" element={<Navigate to="manage" />} />
 			</Routes>
 		</>
 	);

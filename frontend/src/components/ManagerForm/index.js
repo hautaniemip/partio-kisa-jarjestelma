@@ -100,8 +100,8 @@ const AddTaskForm = ({ header, apiPath }) => {
 						</div>
 					)
 				})}
-				<button type="button" onClick={addField}>Add More...</button>
-				<button type="button" onClick={save}>Save</button>
+				<button type="button" onClick={addField}>Lisää...</button>
+				<button type="button" onClick={save}>Tallenna</button>
 			</form>
 		</div>
 	);

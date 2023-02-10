@@ -8,7 +8,9 @@ const TaskView = ({task}) => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
-	const [teamId, setTeamId] = useState(1)
+	const [teamId, setTeamId] = useState(1);
+	const [teamPoints, setTeamPoints] = useState(100);
+	const [resfresh, setRefresh] = useState(false);
 
 	useEffect(() => {
 		let getResults = () => {
@@ -31,8 +33,9 @@ const TaskView = ({task}) => {
 				});
 		};
 
-		getResults()
-	}, [task.id]);
+		getResults();
+		setRefresh(false);
+	}, [task.id, resfresh]);
 
 	const columns = useMemo(
 		() => [
@@ -52,8 +55,11 @@ const TaskView = ({task}) => {
 		setTeamId(event.target.value);
 	}
 
+	const handlePointsChange = (event) => {
+		setTeamPoints(event.target.value);
+	}
+
 	const markTeam = () => {
-		console.log("Team " + teamId + " arrived");
 		const requestOptions = {
 			method: "POST",
 			headers: {
@@ -62,11 +68,26 @@ const TaskView = ({task}) => {
 			body: JSON.stringify({teamId: teamId, taskId: task.id})
 		};
 		// TODO: Validate form inputs before sending:
-		// - no same id
 		fetch("/api/team/change-task", requestOptions)
 		.catch((err) => {
 			console.log(err);
-		})
+		});
+	}
+
+	const sendPoints = () => {
+		const requestOptions = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({teamId: teamId, taskId: task.id, points: teamPoints})
+		};
+		// TODO: Validate form inputs before sending:
+		fetch("/api/results", requestOptions)
+		.catch((err) => {
+			console.log(err);
+		});
+		setRefresh(true);
 	}
 	return (
 		<div>
@@ -78,7 +99,22 @@ const TaskView = ({task}) => {
 					value={teamId}
 					onChange={ event => handleChange(event) }
 				/>
-				<button type="button" onClick={ markTeam }>Merkitse joukkue saapuneeksi</button>
+				<button type="button" onClick={markTeam}>Merkitse joukkue saapuneeksi</button>
+			</div>
+			<div>
+				<input
+					type="number"
+					name="id"
+					value={teamId}
+					onChange={ event => handleChange(event) }
+				/>
+				<input
+					type="number"
+					name="id"
+					value={teamPoints}
+					onChange={ event => handlePointsChange(event) }
+				/>
+				<button type="button" onClick={sendPoints}>Tallenna</button>
 			</div>
 			<h4>Tulokset</h4>
 			{error && (<span>{error}</span>)}

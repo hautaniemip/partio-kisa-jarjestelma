@@ -134,14 +134,21 @@ app.get("/api/results/:id", (req, res) => {
 });
 
 app.post("/api/results", (req, res) => {
-	let query = connection.query(`INSERT INTO Results(TaskId, TeamId, points) VALUES (${req.body.taskId}, ${req.body.teamId}, ${req.body.points})`, (err, rows, fields) => {
+	connection.query(`DELETE FROM Results WHERE TaskId=${req.body.taskId} AND TeamId=${req.body.teamId};`, (err, rows, fields) => {
 		if (err) {
 			console.log(err)
 			res.status(500);
 		}
-
-		res.send()
 	});
+
+	connection.query(`INSERT INTO Results(TaskId, TeamId, points) VALUES (${req.body.taskId}, ${req.body.teamId}, ${req.body.points});`, (err, rows, fields) => {
+		if (err) {
+			console.log(err)
+			res.status(500);
+		}
+	});
+
+	res.send();
 });
 
 const parseResults = (rows) => {

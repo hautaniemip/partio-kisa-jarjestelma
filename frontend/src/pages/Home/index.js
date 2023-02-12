@@ -1,5 +1,6 @@
 import ResultsTable from '../../components/ResultTable';
 import TeamInfoTable from '../../components/TeamInfoTable';
+import TaskInfoTable from '../../components/TaskInfoTable';
 
 const Home = () => {
 	return (
@@ -11,6 +12,7 @@ const Home = () => {
 			<h3>Joukkueet</h3>
 			<TeamInfoTable />
 			<h3>Rastit</h3>
+			<TaskInfoTable />
 		</>
 	);
 };

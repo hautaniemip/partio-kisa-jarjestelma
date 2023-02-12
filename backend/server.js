@@ -1,9 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 const mysql = require('mysql');
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
 
 const connection = mysql.createConnection({
 	host: "192.168.200.204",

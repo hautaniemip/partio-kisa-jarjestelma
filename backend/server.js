@@ -7,11 +7,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-const connection = mysql.createConnection({
+const connection = mysql.createPool({
 	host: "192.168.200.204",
 	user: "kisa-db",
 	password: "kisa-db",
-	database: "kisa"
+	database: "kisa",
+	connectionLimit: 4
 });
 
 const PORT = process.env.PORT || 3001;
@@ -151,6 +152,10 @@ app.post("/api/results", (req, res) => {
 	});
 
 	res.send();
+});
+
+connection.on('error', (err) => {
+	console.log(err);
 });
 
 const parseResults = (rows) => {

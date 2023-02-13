@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import './ManagerForm.css';
 
-const AddTaskForm = ({ header, apiPath }) => {
+const AddTaskForm = ({ header, apiPath, refresh }) => {
 	const [inputFields, setInputFields] = useState([{ id: 1, name: '' }])
 
 	useEffect(() => {
@@ -62,7 +62,12 @@ const AddTaskForm = ({ header, apiPath }) => {
 		.catch((err) => {
 			console.log(err);
 		})
-		.finally(() => window.location.reload(false));
+		.finally(() => {
+			if (refresh)
+				refresh(true);
+			else
+				window.location.reload(false);
+		});
 	}
 
 	const validateFiels = () => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import TaskBar from './../../components/TaskBar';
@@ -7,6 +7,7 @@ import ManagerForm from './../../components/ManagerForm';
 
 const Tasks = () => {
 	const [tasks, setTasks] = useState([]);
+	const [refresh, setRefresh] = useState(false);
 
 	useEffect(() => {
 		let getTasks = () => {
@@ -25,8 +26,9 @@ const Tasks = () => {
 				});
 		};
 
-		getTasks()
-	}, []);
+		getTasks();
+		setRefresh(false);
+	}, [refresh]);
 
 
 	return (
@@ -39,7 +41,7 @@ const Tasks = () => {
 					<Route key={task.id} path={`task-${task.id}`} element={<TaskView task={task} />} />
 				)
 				})}
-				<Route path="/manage" element={<ManagerForm header="Hallitse rasteja" apiPath="/api/tasks" />} />
+				<Route path="/manage" element={<ManagerForm header="Hallitse rasteja" apiPath="/api/tasks" refresh={setRefresh} />} />
 				<Route path="/" element={<Navigate to="manage" />} />
 			</Routes>
 		</>

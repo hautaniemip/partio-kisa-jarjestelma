@@ -10,7 +10,7 @@ const TaskView = ({task}) => {
 
 	const [teamId, setTeamId] = useState(1);
 	const [teamPoints, setTeamPoints] = useState(100);
-	const [resfresh, setRefresh] = useState(false);
+	const [refresh, setRefresh] = useState(false);
 
 	useEffect(() => {
 		let getResults = () => {
@@ -35,7 +35,7 @@ const TaskView = ({task}) => {
 
 		getResults();
 		setRefresh(false);
-	}, [task.id, resfresh]);
+	}, [task.id, refresh]);
 
 	const columns = useMemo(
 		() => [

@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from 'react';
 import Table from '../../components/Table';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
-const TeamInfoTable = () => {
+const TeamInfoTable = ({ refresh }) => {
 	const [teams, setTeams] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -30,7 +30,7 @@ const TeamInfoTable = () => {
 		};
 
 		getTeams()
-	}, []);
+	}, [refresh]);
 
 	const columns = useMemo(() =>
 		[{

@@ -46,7 +46,7 @@ const TaskInfoTable = () => {
 					for (let task of data) {
 						let teamCount = 0;
 						for (let team of teams) {
-							if (team.TaskId == task.id)
+							if (team.TaskId === task.id)
 								teamCount++;
 						}
 						task["teamCount"] = teamCount;

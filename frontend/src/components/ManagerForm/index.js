@@ -6,7 +6,7 @@ const AddTaskForm = ({ header, apiPath }) => {
 	const [inputFields, setInputFields] = useState([{ id: 1, name: '' }])
 
 	useEffect(() => {
-		let getTasks = () => {
+		let getFromAPI = () => {
 			fetch(apiPath)
 				.then((res) => {
 					if (!res.ok)
@@ -21,7 +21,7 @@ const AddTaskForm = ({ header, apiPath }) => {
 				});
 		};
 
-		getTasks()
+		getFromAPI()
 	}, [apiPath]);
 
 	const handleFormChange = (index, event) => {

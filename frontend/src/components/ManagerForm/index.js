@@ -96,7 +96,7 @@ const AddTaskForm = ({ header, apiPath }) => {
 								value={input.name}
 								onChange={event => handleFormChange(index, event)}
 							/>
-							<button type="button" onClick={() => removeField(index)}>X</button>
+							<button type="button" onClick={() => removeField(index)}>&times;</button>
 						</div>
 					)
 				})}

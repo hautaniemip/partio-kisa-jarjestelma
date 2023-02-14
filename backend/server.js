@@ -17,6 +17,18 @@ const connection = mysql.createPool({
 
 const PORT = process.env.PORT || 3001;
 
+app.get("/api/ping", (req, res) => {
+	connection.query("SHOW TABLES;", (err, rows, fields) => {
+		let responseText = "OK";
+		if (err) {
+			console.log(err);
+			res.status(500);
+			responseText = "No database connection";
+		}
+		res.write(responseText);
+		res.send();
+	});
+});
 
 app.get("/api/teams", (req, res) => {
 	let query = connection.query("SELECT * FROM Teams;", (err, rows, fields) => {

@@ -13,8 +13,12 @@ const Teams = () => {
 	return (
 		<div>
 			<h2>Joukkueet</h2>
-			<TeamInfoTable refresh={refresh} />
-			<ManagerForm header="Hallitse joukkueita" apiPath="/api/teams" refresh={setRefresh} />
+			<div className="element-container">
+				<TeamInfoTable refresh={refresh} />
+			</div>
+			<div className="element-container">
+				<ManagerForm header="Hallitse joukkueita" apiPath="/api/teams" reloadParent={setRefresh} />
+			</div>
 		</div>
 	);
 };

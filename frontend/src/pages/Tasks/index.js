@@ -41,7 +41,10 @@ const Tasks = () => {
 					<Route key={task.id} path={`task-${task.id}`} element={<TaskView task={task} />} />
 				)
 				})}
-				<Route path="/manage" element={<ManagerForm header="Hallitse rasteja" apiPath="/api/tasks" refresh={setRefresh} />} />
+				<Route path="/manage" element={
+					<div className="element-container">
+						<ManagerForm header="Hallitse rasteja" apiPath="/api/tasks" reloadParent={setRefresh} />
+					</div>} />
 				<Route path="/" element={<Navigate to="manage" />} />
 			</Routes>
 		</>

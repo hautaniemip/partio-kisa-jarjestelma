@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 
 import './ManagerForm.css';
 
-const AddTaskForm = ({ header, apiPath, refresh }) => {
-	const [inputFields, setInputFields] = useState([{ id: 1, name: '' }])
+const ManagerForm = ({ header, apiPath, reloadParent }) => {
+	const [inputFields, setInputFields] = useState([{ id: 1, name: '' }]);
+	const [refresh, setRefresh] = useState(false);
 
 	useEffect(() => {
 		let getFromAPI = () => {
@@ -21,8 +22,9 @@ const AddTaskForm = ({ header, apiPath, refresh }) => {
 				});
 		};
 
-		getFromAPI()
-	}, [apiPath]);
+		getFromAPI();
+		setRefresh(false);
+	}, [apiPath, refresh]);
 
 	const handleFormChange = (index, event) => {
 		let data = [...inputFields];
@@ -63,11 +65,16 @@ const AddTaskForm = ({ header, apiPath, refresh }) => {
 			console.log(err);
 		})
 		.finally(() => {
-			if (refresh)
-				refresh(true);
+			if (reloadParent)
+				reloadParent(true);
 			else
 				window.location.reload(false);
 		});
+	}
+
+	const cancel = (event) => {
+		event.preventDefault();
+		setRefresh(true);
 	}
 
 	const validateFiels = () => {
@@ -101,15 +108,16 @@ const AddTaskForm = ({ header, apiPath, refresh }) => {
 								value={input.name}
 								onChange={event => handleFormChange(index, event)}
 							/>
-							<button type="button" onClick={() => removeField(index)}>&times;</button>
+							<button className="btn remove-btn" type="button" onClick={() => removeField(index)}>&times;</button>
 						</div>
 					)
 				})}
-				<button type="button" onClick={addField}>Lisää...</button>
-				<button type="button" onClick={save}>Tallenna</button>
+				<button className="btn add-btn" type="button" onClick={addField}>Lisää...</button>
+				<button className="btn save-btn" type="button" onClick={save}>Tallenna</button>
+				<button className="btn cancel-btn" type="button" onClick={cancel}>Peruuta</button>
 			</form>
 		</div>
 	);
 }
 
-export default AddTaskForm;
+export default ManagerForm;

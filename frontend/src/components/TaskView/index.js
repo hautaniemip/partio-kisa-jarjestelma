@@ -2,14 +2,16 @@ import React, { useState, useEffect, useMemo } from 'react';
 
 import Table from './../Table';
 import LoadingSpinner from './../LoadingSpinner';
+import TaskInfoTable from './../TaskInfoTable';
 
 const TaskView = ({task}) => {
 	const [results, setResults] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
-	const [teamId, setTeamId] = useState(1);
-	const [teamPoints, setTeamPoints] = useState(100);
+	const [teamId, setTeamId] = useState(100);
+	const [teamPoints, setTeamPoints] = useState(0);
+	const [teamTime, setTeamTime] = useState();
 	const [refresh, setRefresh] = useState(false);
 
 	useEffect(() => {
@@ -46,6 +48,10 @@ const TaskView = ({task}) => {
 			{
 				Header: "Pisteet",
 				accessor: "team." + task.id.toString()
+			},
+			{
+				Header: "Aika",
+				accessor: "team.times." + task.id.toString()
 			}
 		],
 		[task.id]
@@ -59,19 +65,24 @@ const TaskView = ({task}) => {
 		setTeamPoints(event.target.value);
 	}
 
+	const handleTimeChange = (event) => {
+		setTeamTime(event.target.value);
+	}
+
 	const markTeam = () => {
 		const requestOptions = {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
 			},
-			body: JSON.stringify({teamId: teamId, taskId: task.id})
+			body: JSON.stringify({teamId: +teamId, taskId: task.id})
 		};
 		// TODO: Validate form inputs before sending:
 		fetch("/api/team/change-task", requestOptions)
 		.catch((err) => {
 			console.log(err);
 		});
+		setRefresh(true);
 	}
 
 	const sendPoints = () => {
@@ -80,7 +91,7 @@ const TaskView = ({task}) => {
 			headers: {
 				"Content-Type": "application/json"
 			},
-			body: JSON.stringify({teamId: teamId, taskId: task.id, points: teamPoints})
+			body: JSON.stringify({teamId: teamId, taskId: task.id, points: teamPoints, time: teamTime || null})
 		};
 		// TODO: Validate form inputs before sending:
 		fetch("/api/results", requestOptions)
@@ -89,6 +100,7 @@ const TaskView = ({task}) => {
 		});
 		setRefresh(true);
 	}
+
 	return (
 		<div>
 			<h3>{task.name}</h3>
@@ -102,7 +114,7 @@ const TaskView = ({task}) => {
 					/>
 					<button type="button" onClick={markTeam}>Merkitse joukkue saapuneeksi</button>
 				</div>
-				
+
 				<div className="flex-column">
 					<label>Joukkue</label>
 					<input
@@ -118,6 +130,13 @@ const TaskView = ({task}) => {
 						value={teamPoints}
 						onChange={ event => handlePointsChange(event) }
 					/>
+					<label>Aika</label>
+					<input
+						type="text"
+						name="time"
+						value={teamTime}
+						onChange={ event => handleTimeChange(event) }
+					/>
 					<button type="button" onClick={sendPoints}>Tallenna</button>
 			</div>
 
@@ -131,7 +150,7 @@ const TaskView = ({task}) => {
 
 			<div className="element-container">
 				<h3>Rastit</h3>
-				<TaskInfoTable />
+				<TaskInfoTable refresh={refresh}/>
 			</div>
 		</div>
 	);

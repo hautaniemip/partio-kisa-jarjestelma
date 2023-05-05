@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from 'react';
 import Table from '../../components/Table';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
-const TaskInfoTable = () => {
+const TaskInfoTable = ({refresh}) => {
 	const [teams, setTeams] = useState(null);
 	const [tasks, setTasks] = useState(null);
 	const [loading, setLoading] = useState(true);
@@ -31,7 +31,7 @@ const TaskInfoTable = () => {
 		};
 
 		getTeams()
-	}, []);
+	}, [refresh]);
 
 	useEffect(() => {
 		let getTasks = () => {

@@ -138,7 +138,7 @@ app.get("/api/results", (req, res) => {
 });
 
 app.get("/api/results/:id", (req, res) => {
-	let query = connection.query(`SELECT Results.TeamId, Results.TaskId, Results.points, Teams.name FROM Results JOIN Teams ON Results.TeamId=Teams.id AND Results.TaskId=${req.params.id};`, (err, rows, fields) => {
+	let query = connection.query(`SELECT Results.TeamId, Results.TaskId, Results.points, Results.time, Teams.name FROM Results JOIN Teams ON Results.TeamId=Teams.id AND Results.TaskId=${req.params.id};`, (err, rows, fields) => {
 		if (err) {
 			console.log(err)
 			res.status(500);
@@ -159,7 +159,7 @@ app.post("/api/results", (req, res) => {
 		}
 	});
 
-	connection.query(`INSERT INTO Results(TaskId, TeamId, points) VALUES (${req.body.taskId}, ${req.body.teamId}, ${req.body.points});`, (err, rows, fields) => {
+	connection.query(`INSERT INTO Results(TaskId, TeamId, points, time) VALUES (${req.body.taskId}, ${req.body.teamId}, ${req.body.points}, "${req.body.time}");`, (err, rows, fields) => {
 		if (err) {
 			console.log(err)
 			res.status(500);
@@ -179,7 +179,9 @@ const parseResults = (rows) => {
 	for (const row of rows) {
 		results[row.TeamId] = results[row.TeamId] || {};
 		results[row.TeamId]["name"] = row.name;
-		results[row.TeamId][row.TaskId] = row.points;
+		results[row.TeamId][row.TaskId] = row.points || 0;
+		results[row.TeamId]["times"] = results[row.TeamId]["times"] || {};
+		results[row.TeamId]["times"][row.TaskId] = row.time;
 		results[row.TeamId]["total"] = results[row.TeamId]["total"] + row.points || row.points;
 	}
 

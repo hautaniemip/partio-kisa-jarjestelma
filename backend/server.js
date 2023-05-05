@@ -159,7 +159,7 @@ app.post("/api/results", (req, res) => {
 		}
 	});
 
-	connection.query(`INSERT INTO Results(TaskId, TeamId, points, time) VALUES (${req.body.taskId}, ${req.body.teamId}, ${req.body.points}, "${req.body.time}");`, (err, rows, fields) => {
+	connection.query(`INSERT INTO Results(TaskId, TeamId, points, time) VALUES (${req.body.taskId}, ${req.body.teamId}, ${req.body.points}, NULLIF("${req.body.time}", "null"));`, (err, rows, fields) => {
 		if (err) {
 			console.log(err)
 			res.status(500);

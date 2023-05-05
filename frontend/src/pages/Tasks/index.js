@@ -45,7 +45,7 @@ const Tasks = () => {
 					<div className="element-container">
 						<ManagerForm header="Hallitse rasteja" apiPath="/api/tasks" reloadParent={setRefresh} />
 					</div>} />
-				<Route path="/" element={<Navigate to="manage" />} />
+				<Route path="/" element={<Navigate to="task-1" />} />
 			</Routes>
 		</>
 	);

@@ -92,34 +92,47 @@ const TaskView = ({task}) => {
 	return (
 		<div>
 			<h3>{task.name}</h3>
-			<div>
-				<input
-					type="number"
-					name="id"
-					value={teamId}
-					onChange={ event => handleChange(event) }
-				/>
-				<button type="button" onClick={markTeam}>Merkitse joukkue saapuneeksi</button>
+			<div className="element-container">
+				<div className="flex-column">
+					<input
+						type="number"
+						name="id"
+						value={teamId}
+						onChange={ event => handleChange(event) }
+					/>
+					<button type="button" onClick={markTeam}>Merkitse joukkue saapuneeksi</button>
+				</div>
+				
+				<div className="flex-column">
+					<label>Joukkue</label>
+					<input
+						type="number"
+						name="id"
+						value={teamId}
+						onChange={ event => handleChange(event) }
+					/>
+					<label>Pisteet</label>
+					<input
+						type="number"
+						name="points"
+						value={teamPoints}
+						onChange={ event => handlePointsChange(event) }
+					/>
+					<button type="button" onClick={sendPoints}>Tallenna</button>
 			</div>
-			<div>
-				<input
-					type="number"
-					name="id"
-					value={teamId}
-					onChange={ event => handleChange(event) }
-				/>
-				<input
-					type="number"
-					name="id"
-					value={teamPoints}
-					onChange={ event => handlePointsChange(event) }
-				/>
-				<button type="button" onClick={sendPoints}>Tallenna</button>
+
 			</div>
-			<h4>Tulokset</h4>
-			{error && (<span>{error}</span>)}
-			{loading && (<LoadingSpinner />)}
-			{results && <Table columns={columns} data={results} />}
+			<div className="element-container">
+				<h3>Tulokset</h3>
+				{error && (<span>{error}</span>)}
+				{loading && (<LoadingSpinner />)}
+				{results && <Table columns={columns} data={results} />}
+			</div>
+
+			<div className="element-container">
+				<h3>Rastit</h3>
+				<TaskInfoTable />
+			</div>
 		</div>
 	);
 }

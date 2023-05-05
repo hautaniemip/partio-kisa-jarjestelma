@@ -4,11 +4,41 @@ nav {
 }
 
 .nav-item {
+	position: relative;
+	display: inline-block;
+	font-weight: 600;
+	font-size: 1.25em;
 	text-decoration: none;
-	color: black;
-	padding: 1rem;
+	margin: 1rem;
+	cursor: pointer;
+	color: #61dafb;
+	transition: color 0.25s ease-out;
 }
 
 .nav-item.active {
-	background-color: red;
+	color: #007cff;
+}
+
+.nav-item.active::after {
+	transform: scaleX(1);
+	background-color: #007cff;
+}
+
+.nav-item::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 4px;
+	bottom: 0;
+	left: 0;
+	background-color: #61dafb;
+	transform: scaleX(0);
+	transform-origin: bottom right;
+	transition: transform 0.25s ease-out, background-color 0.25s ease-out;
+}
+
+
+.nav-item:hover::after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
 }

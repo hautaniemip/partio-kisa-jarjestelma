@@ -78,11 +78,11 @@ const ResultsTable = () => {
 	);
 
 	return (
-		<div>
+		<>
 			{error && (<span>{error}</span>)}
 			{loading && (<LoadingSpinner />)}
 			{tasks && results && <Table columns={columns} data={results} />}
-		</div>
+		</>
 	);
 }
 

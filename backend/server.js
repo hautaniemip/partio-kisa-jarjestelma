@@ -34,7 +34,7 @@ app.get("/api/ping", (req, res) => {
 });
 
 app.get("/api/teams", (req, res) => {
-    let query = connection.query("SELECT * FROM Teams;", (err, rows, fields) => {
+    connection.query("SELECT * FROM Teams;", (err, rows, fields) => {
         if (err) {
             console.log(err)
             res.status(500);
@@ -44,7 +44,6 @@ app.get("/api/teams", (req, res) => {
 });
 
 app.post("/api/teams", (req, res) => {
-    //connection.query("SET FOREIGN_KEY_CHECKS=0;")
     let newRows = [];
     for (const team of req.body)
         newRows.push([team.id, team.name, 1]);
@@ -55,15 +54,6 @@ app.post("/api/teams", (req, res) => {
             res.status(500);
         }
     });
-    //connection.query("SET FOREIGN_KEY_CHECKS=1;")
-
-
-    // connection.query(`INSERT INTO Teams(id, name, TaskId) VALUES ?;`, [newRows], (err, rows, fields) => {
-    // 	if (err) {
-    // 		console.log(err)
-    // 		res.status(500);
-    // 	}
-    // });
 
     res.send();
 });
@@ -73,63 +63,55 @@ app.post("/api/team/change-task", (req, res) => {
                       SET TaskId=${req.body.taskId}
                       WHERE id = ${req.body.teamId};`, (err, fields) => {
         if (err) {
-            console.log(err)
+            console.log(err);
             res.status(500);
         }
     });
-
 
     res.send();
 });
 
 app.get("/api/tasks", (req, res) => {
-    let query = connection.query("SELECT * FROM Tasks;", (err, rows, fields) => {
+    connection.query("SELECT * FROM Tasks;", (err, rows, fields) => {
         if (err) {
-            console.log(err)
+            console.log(err);
             res.status(500);
         }
+
         res.json(rows);
     });
 });
 
 app.post("/api/tasks", (req, res) => {
-    //connection.query("SET FOREIGN_KEY_CHECKS=0;")
     let newRows = [];
     for (const task of req.body)
         newRows.push([task.id, task.name]);
 
     connection.query("SET FOREIGN_KEY_CHECKS=0; DELETE FROM Tasks; SET FOREIGN_KEY_CHECKS=1; INSERT INTO Tasks(id, name) VALUES ?;", [newRows], (err, rows, fields) => {
         if (err) {
-            console.log(err)
+            console.log(err);
             res.status(500);
         }
     });
-    //connection.query("SET FOREIGN_KEY_CHECKS=1;")
-
-    // connection.query(`INSERT INTO Tasks(id, name) VALUES ?;`, [newRows], (err, rows, fields) => {
-    // 	if (err) {
-    // 		console.log(err)
-    // 		res.status(500);
-    // 	}
-    // });
 
     res.send();
 });
 
 app.get("/api/task/:id", (req, res) => {
-    let query = connection.query(`SELECT *
-                                  FROM Tasks
-                                  WHERE id = ${req.params.id};`, (err, rows, fields) => {
+    connection.query(`SELECT *
+                      FROM Tasks
+                      WHERE id = ${req.params.id};`, (err, rows, fields) => {
         if (err) {
-            console.log(err)
+            console.log(err);
             res.status(500);
         }
+
         res.json(rows);
     });
 });
 
 app.get("/api/results", (req, res) => {
-    let query = connection.query("SELECT Results.TeamId, Results.TaskId, Results.points, Teams.name FROM Results JOIN Teams ON Results.TeamId=Teams.id;", (err, rows, fields) => {
+    connection.query("SELECT Results.TeamId, Results.TaskId, Results.points, Teams.name FROM Results JOIN Teams ON Results.TeamId=Teams.id;", (err, rows, fields) => {
         if (err) {
             console.log(err)
             res.status(500);
@@ -143,9 +125,9 @@ app.get("/api/results", (req, res) => {
 });
 
 app.get("/api/results/:id", (req, res) => {
-    let query = connection.query(`SELECT Results.TeamId, Results.TaskId, Results.points, Results.time, Teams.name
-                                  FROM Results
-                                           JOIN Teams ON Results.TeamId = Teams.id AND Results.TaskId = ${req.params.id};`, (err, rows, fields) => {
+    connection.query(`SELECT Results.TeamId, Results.TaskId, Results.points, Results.time, Teams.name
+                      FROM Results
+                               JOIN Teams ON Results.TeamId = Teams.id AND Results.TaskId = ${req.params.id};`, (err, rows, fields) => {
         if (err) {
             console.log(err)
             res.status(500);
@@ -164,7 +146,7 @@ app.post("/api/results", (req, res) => {
                       WHERE TaskId = ${req.body.taskId}
                         AND TeamId = ${req.body.teamId};`, (err, rows, fields) => {
         if (err) {
-            console.log(err)
+            console.log(err);
             res.status(500);
         }
     });
@@ -173,7 +155,7 @@ app.post("/api/results", (req, res) => {
                       VALUES (${req.body.taskId}, ${req.body.teamId}, ${req.body.points},
                               NULLIF("${req.body.time}", "null"));`, (err, rows, fields) => {
         if (err) {
-            console.log(err)
+            console.log(err);
             res.status(500);
         }
     });

@@ -1,22 +1,15 @@
 const express = require('express');
 const cors = require('cors');
-const mysql = require('mysql');
 
 require('dotenv').config()
+
+const connection = require('./db/db')
 
 const app = express();
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cors());
 
-const connection = mysql.createPool({
-    host: process.env.MYSQL_SERVER,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWD,
-    database: process.env.MYSQL_DB,
-    connectionLimit: 4,
-    multipleStatements: true
-});
 
 const PORT = process.env.PORT || 3001;
 
@@ -161,10 +154,6 @@ app.post("/api/results", (req, res) => {
     });
 
     res.send();
-});
-
-connection.on('error', (err) => {
-    console.log(err);
 });
 
 const parseResults = (rows) => {

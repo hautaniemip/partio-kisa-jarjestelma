@@ -23,8 +23,8 @@ function App() {
     })
 
     useEffect(() => {
-        const ping = () => {
-            fetch("/api/ping")
+        const statusCheck = () => {
+            fetch("/api/status")
                 .then((res) => {
                     return res.text();
                 })
@@ -48,10 +48,10 @@ function App() {
                     }
                 })
         }
-        ping();
+        statusCheck();
 
         const timer = setInterval(() => {
-            ping()
+            statusCheck()
         }, 15000);
 
         return () => clearInterval(timer);

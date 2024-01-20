@@ -1,17 +1,17 @@
 .table-container {
-	overflow: auto;
+    overflow: auto;
 }
 
 table {
-	margin: auto;
+    margin: auto;
 }
 
 table, th, td {
-	border: 2px solid #9f9fae;
-	border-collapse: collapse;
+    border: 2px solid #9f9fae;
+    border-collapse: collapse;
 }
 
 th, td {
-	padding: 0.5em;
-	min-width: max-content;
+    padding: 0.5em;
+    min-width: max-content;
 }

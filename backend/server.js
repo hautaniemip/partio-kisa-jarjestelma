@@ -1,6 +1,8 @@
-const express = require('express');
-const cors = require('cors');
-const mysql = require('mysql');
+import express from "express";
+import cors from "cors";
+import mysql from "mysql";
+
+require('dotenv').config()
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));

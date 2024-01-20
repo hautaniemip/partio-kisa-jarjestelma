@@ -8,12 +8,12 @@ app.use(express.json());
 app.use(cors());
 
 const connection = mysql.createPool({
-	host: "192.168.200.204",
-	user: "kisa-db",
-	password: "kisa-db",
-	database: "kisa",
-	connectionLimit: 4,
-	multipleStatements: true
+    host: process.env.MYSQL_SERVER,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWD,
+    database: process.env.MYSQL_DB,
+    connectionLimit: 4,
+    multipleStatements: true
 });
 
 const PORT = process.env.PORT || 3001;

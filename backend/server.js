@@ -14,9 +14,9 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cors());
 
-app.use(teamRouter);
-app.use(taskRouter);
-app.use(resultRouter);
+app.use("/api/team", teamRouter);
+app.use("/api/task", taskRouter);
+app.use("/api/result", resultRouter);
 app.use("/api/auth", authRouter);
 
 const PORT = process.env.PORT || 3001;

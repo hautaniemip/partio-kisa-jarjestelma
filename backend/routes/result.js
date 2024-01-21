@@ -3,7 +3,7 @@ const router = express.Router();
 
 const connection = require('../db/db');
 
-router.get("/api/results", (req, res) => {
+router.get("/", (req, res) => {
     connection.query("SELECT Results.TeamId, Results.TaskId, Results.points, Teams.name FROM Results JOIN Teams ON Results.TeamId=Teams.id;", (err, rows, fields) => {
         if (err) {
             console.log(err)
@@ -17,7 +17,7 @@ router.get("/api/results", (req, res) => {
     });
 });
 
-router.get("/api/results/:id", (req, res) => {
+router.get("/:id", (req, res) => {
     connection.query(`SELECT Results.TeamId, Results.TaskId, Results.points, Results.time, Teams.name
                       FROM Results
                                JOIN Teams ON Results.TeamId = Teams.id AND Results.TaskId = ${req.params.id};`, (err, rows, fields) => {
@@ -33,7 +33,7 @@ router.get("/api/results/:id", (req, res) => {
     });
 });
 
-router.post("/api/results", (req, res) => {
+router.post("/", (req, res) => {
     connection.query(`DELETE
                       FROM Results
                       WHERE TaskId = ${req.body.taskId}

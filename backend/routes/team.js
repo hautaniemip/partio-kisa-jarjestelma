@@ -3,7 +3,7 @@ const router = express.Router();
 
 const connection = require('../db/db');
 
-router.get("/api/teams", (req, res) => {
+router.get("/", (req, res) => {
     connection.query("SELECT * FROM Teams;", (err, rows, fields) => {
         if (err) {
             console.log(err)
@@ -13,7 +13,7 @@ router.get("/api/teams", (req, res) => {
     });
 });
 
-router.post("/api/teams", (req, res) => {
+router.post("/", (req, res) => {
     let newRows = [];
     for (const team of req.body)
         newRows.push([team.id, team.name, 1]);
@@ -28,7 +28,7 @@ router.post("/api/teams", (req, res) => {
     res.send();
 });
 
-router.post("/api/team/change-task", (req, res) => {
+router.post("/change-task", (req, res) => {
     connection.query(`UPDATE Teams
                       SET TaskId=${req.body.taskId}
                       WHERE id = ${req.body.teamId};`, (err, fields) => {

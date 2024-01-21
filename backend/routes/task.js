@@ -3,7 +3,7 @@ const router = express.Router();
 
 const connection = require('../db/db');
 
-router.get("/api/tasks", (req, res) => {
+router.get("/", (req, res) => {
     connection.query("SELECT * FROM Tasks;", (err, rows, fields) => {
         if (err) {
             console.log(err);
@@ -14,7 +14,7 @@ router.get("/api/tasks", (req, res) => {
     });
 });
 
-router.post("/api/tasks", (req, res) => {
+router.post("/", (req, res) => {
     let newRows = [];
     for (const task of req.body)
         newRows.push([task.id, task.name]);
@@ -29,7 +29,7 @@ router.post("/api/tasks", (req, res) => {
     res.send();
 });
 
-router.get("/api/task/:id", (req, res) => {
+router.get("/:id", (req, res) => {
     connection.query(`SELECT *
                       FROM Tasks
                       WHERE id = ${req.params.id};`, (err, rows, fields) => {

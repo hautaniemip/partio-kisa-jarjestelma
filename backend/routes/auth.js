@@ -33,6 +33,10 @@ router.post("/login", (req, res) => {
     });
 });
 
+router.get("/logout", passport.authenticate('jwt'), (req, res) => {
+    res.clearCookie('access_token').send("Logged out");
+});
+
 router.post("/add-user", passport.authenticate('jwt'), (req, res) => {
     const token = req.cookies['access_token']
     const decoded_token = jwt.verify(token, process.env.SECRET);

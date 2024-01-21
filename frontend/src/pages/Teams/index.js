@@ -17,7 +17,7 @@ const Teams = () => {
                 <TeamInfoTable refresh={refresh}/>
             </div>
             <div className="element-container">
-                <ManagerForm header="Hallitse joukkueita" apiPath="/api/teams" reloadParent={setRefresh}/>
+                <ManagerForm header="Hallitse joukkueita" apiPath="/api/team" reloadParent={setRefresh}/>
             </div>
         </div>
     );

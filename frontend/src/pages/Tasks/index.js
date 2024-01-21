@@ -11,7 +11,7 @@ const Tasks = () => {
 
     useEffect(() => {
         let getTasks = () => {
-            fetch("/api/tasks")
+            fetch("/api/task")
                 .then((res) => {
                     if (!res.ok)
                         throw new Error(`Failed loading Tasks:\nHTTP error: ${res.status}`);
@@ -43,7 +43,7 @@ const Tasks = () => {
                 })}
                 <Route path="/manage" element={
                     <div className="element-container">
-                        <ManagerForm header="Hallitse rasteja" apiPath="/api/tasks" reloadParent={setRefresh}/>
+                        <ManagerForm header="Hallitse rasteja" apiPath="/api/task" reloadParent={setRefresh}/>
                     </div>
                 }/>
                 <Route path="/" element={<Navigate to="task-1"/>}/>

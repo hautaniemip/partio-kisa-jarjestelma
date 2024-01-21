@@ -10,7 +10,7 @@ const TeamInfoTable = ({refresh}) => {
 
     useEffect(() => {
         let getTeams = () => {
-            fetch("/api/teams")
+            fetch("/api/team")
                 .then((res) => {
                     if (!res.ok)
                         throw new Error(`HTTP error: ${res.status}`);

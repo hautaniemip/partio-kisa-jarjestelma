@@ -12,7 +12,7 @@ const ResultsTable = () => {
 
     useEffect(() => {
         let getTasks = () => {
-            fetch("/api/tasks")
+            fetch("/api/task")
                 .then((res) => {
                     if (!res.ok)
                         throw new Error(`HTTP error: ${res.status}`);
@@ -36,7 +36,7 @@ const ResultsTable = () => {
 
     useEffect(() => {
         let getResults = () => {
-            fetch("/api/results")
+            fetch("/api/result")
                 .then((res) => {
                     if (!res.ok)
                         throw new Error(`HTTP error: ${res.status}`);

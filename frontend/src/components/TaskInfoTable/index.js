@@ -11,7 +11,7 @@ const TaskInfoTable = ({refresh}) => {
 
     useEffect(() => {
         let getTeams = () => {
-            fetch("/api/teams")
+            fetch("/api/team")
                 .then((res) => {
                     if (!res.ok)
                         throw new Error(`HTTP error: ${res.status}`);
@@ -35,7 +35,7 @@ const TaskInfoTable = ({refresh}) => {
 
     useEffect(() => {
         let getTasks = () => {
-            fetch("/api/tasks")
+            fetch("/api/task")
                 .then((res) => {
                     if (!res.ok)
                         throw new Error(`HTTP error: ${res.status}`);

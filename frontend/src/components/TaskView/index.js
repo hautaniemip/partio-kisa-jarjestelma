@@ -16,7 +16,7 @@ const TaskView = ({task}) => {
 
     useEffect(() => {
         let getResults = () => {
-            fetch(`/api/results/${task.id}`)
+            fetch(`/api/result/${task.id}`)
                 .then((res) => {
                     if (!res.ok)
                         throw new Error(`HTTP error: ${res.status}`);
@@ -98,7 +98,7 @@ const TaskView = ({task}) => {
             body: JSON.stringify({teamId: teamId, taskId: task.id, points: teamPoints, time: teamTime || null})
         };
         // TODO: Validate form inputs before sending:
-        fetch("/api/results", requestOptions)
+        fetch("/api/result", requestOptions)
             .catch((err) => {
                 console.log(err);
             });

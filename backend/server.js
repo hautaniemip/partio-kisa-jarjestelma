@@ -7,6 +7,7 @@ const connection = require('./db/db');
 const teamRouter = require('./routes/team');
 const taskRouter = require('./routes/task');
 const resultRouter = require('./routes/result');
+const authRouter = require('./routes/auth');
 
 const app = express();
 app.use(express.urlencoded({extended: true}));
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(teamRouter);
 app.use(taskRouter);
 app.use(resultRouter);
+app.use("/api/auth", authRouter);
 
 const PORT = process.env.PORT || 3001;
 
